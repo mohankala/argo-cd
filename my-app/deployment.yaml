@@ -1,23 +1,22 @@
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nginx
   namespace: prod
-  lables:
+  lables: 
     app: nginx
 spec:
-  replicas: 1
+  replicas: 3
   selector:
-    matchLables:
-      app: nginx
+    matchLabels: # <---- Add or correct this field
+      app: nginx-app # <---- Key-value pair must match template labels
   template:
     metadata:
-      lables:
-        app: nginx
+      labels: # <---- These must match the selector labels
+        app: nginx-app
     spec:
       containers:
-         - name: nginx
-           image: kalamohanrao/nginx:v0.1.0
-           ports:
-              - containerPort: 80
+      - name: nginx
+        image: kalamohanrao/nginx:v0.1.0
+        ports:
+        - containerPort: 80
